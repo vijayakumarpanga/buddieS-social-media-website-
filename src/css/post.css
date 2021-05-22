@@ -1,11 +1,15 @@
 .post-wrapper {
-  background: rgb(255, 248, 220);
-  border: solid;
-  border-color: hsl(9, 90%, 12%);
+  margin: 1px 100px 0px 100px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-top: 20px;
+  background: #fff;
 }
 .post-header {
   display: flex;
   padding: 10px 10px;
+  background-color: lavender;
 }
 .post-avatar {
   display: flex;
