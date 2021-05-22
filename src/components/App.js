@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 import '../css/post.css'
 import {fetchPosts} from '../actions/posts'
 import Navbar from './Navbar';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
+import PageNotFound from './PageNotFound';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts())
@@ -16,10 +17,15 @@ class App extends Component {
     return (
       <Router>
       <div>
-        {/* <Navbar></Navbar>
+        {/* 
         <Post ></Post> */}
-        <Route path="/" component={Navbar}></Route>
-        <Route path="/" component={Post}/>
+        <Navbar></Navbar>
+        <Switch>
+        <Route exact path="/" render={(props)=>{
+          return <Post {...props}></Post>
+        }}/>
+        <Route  component={PageNotFound}/>
+        </Switch>
       </div>
       </Router>
     );
