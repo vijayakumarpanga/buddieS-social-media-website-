@@ -62,7 +62,7 @@ function Navbar(props) {
               <Link to="/logout">Log out</Link>Log out
             </li>
             <li>
-              <Link to="./signup"> Register</Link>
+              <Link to="./signUp"> Register</Link>
             </li>
           </ul>
         </div>

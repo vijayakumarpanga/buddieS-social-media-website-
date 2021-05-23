@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Login from "./Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./PageNotFound";
+import SignUp from "./SignUp";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -29,6 +30,7 @@ class App extends Component {
               }}
             />
             <Route path="/login" component={Login} />
+            <Route path="/signUp" component={SignUp} />
             <Route component={PageNotFound} />
           </Switch>
         </div>

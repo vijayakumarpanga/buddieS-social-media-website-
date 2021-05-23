@@ -18,7 +18,7 @@ export const login = (email, password) => {
     fetch(url, {
       method: "POST",
       headers: {
-        content: "application-form-url-encoded",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: getFormBody({ email, password }),
     })
