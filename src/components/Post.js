@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import '../css/post.css'
 class Post extends Component {
+    componentWillUnmount(){
+        console.log("Post  Unmounted")
+      }
+      componentDidMount(){
+          console.log("post Mounted")
+      }
     render() {
         const {posts} = this.props.posts
         console.log("inside Post",this.props)

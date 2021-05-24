@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router";
+import { clearAuthState } from "../actions/auth";
 import { signUp } from "../actions/signUp";
 
 import "../css/login.css";
@@ -14,6 +16,13 @@ class SignUp extends Component {
       confirmPassword: "",
     };
   }
+  componentWillUnmount(){
+    console.log("SignUp Unmounted")
+    this.props.dispatch(clearAuthState())
+  }
+  componentDidMount(){
+    console.log("SignUp Mounted")
+}
   handleChangeName = (e) => {
     console.log(e.target.value);
     this.setState({ ...this.state, name: e.target.value });
@@ -39,11 +48,15 @@ class SignUp extends Component {
       this.props.dispatch(signUp(name, email, password, confirmPassword));
   };
   render() {
-    const { isSignUpInProgress, error } = this.props.signUp;
+    const { isInProgress, error,isLoggedIn } = this.props.auth;
+    console.log("Sign up rendered")
     console.log(this.props);
+    if(isLoggedIn){
+      <Redirect to='/'></Redirect>
+    }
     return (
       <form className="login-form">
-        {error && <div className="error-dailog">{error}</div>}
+        {error && <div className="alert error-dailog">{error}</div>}
         <span className="login-signup-header">Sign Up</span>
         <div className="field">
           <input
@@ -82,12 +95,12 @@ class SignUp extends Component {
           ></input>
         </div>
         <div className="field">
-          {isSignUpInProgress ? (
-            <button onClick={this.handleSubmit} disabled={isSignUpInProgress}>
+          {isInProgress ? (
+            <button onClick={this.handleSubmit} disabled={isInProgress}>
               Signing Up...
             </button>
           ) : (
-            <button onClick={this.handleSubmit} disabled={isSignUpInProgress}>
+            <button onClick={this.handleSubmit} disabled={isInProgress}>
               Sign Up
             </button>
           )}
@@ -98,6 +111,6 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-  return { signUp: state.signUp };
+  return { auth: state.auth };
 }
 export default connect(mapStateToProps)(SignUp);

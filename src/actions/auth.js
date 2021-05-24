@@ -1,6 +1,6 @@
 import { APIUrls } from "../helpers/urls";
 import { getFormBody } from "../helpers/Utils";
-import { LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS } from "./actionType";
+import { AUTHENTICATE_USER, CLEAR_AUTH_STATE, LOGIN_FAILED, LOGIN_START, LOGIN_SUCCESS, LOG_OUT_USER } from "./actionType";
 
 export const startLogin = () => {
   return { type: LOGIN_START };
@@ -26,9 +26,29 @@ export const login = (email, password) => {
       .then((data) => {
         console.log("data in login : ", data);
         if (data.success) {
-          dispatch(loginSuccess(data.user));
+          localStorage.setItem('token',data.data.token)
+          dispatch(loginSuccess(data.data.user));
+          return;
         }
         dispatch(loginFailed(data.message));
       });
   };
 };
+
+export const authenticateUser=(user)=>{
+  return{
+    type : AUTHENTICATE_USER,
+    user : user
+  }
+}
+export const logoutUser=()=>{
+  return{
+    type : LOG_OUT_USER,
+    
+  }
+}
+export const clearAuthState=()=>{
+  return{
+    type : CLEAR_AUTH_STATE
+  }
+}

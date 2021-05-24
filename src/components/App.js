@@ -8,18 +8,32 @@ import Login from "./Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./PageNotFound";
 import SignUp from "./SignUp";
+import jwtDecode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { authenticateUser } from "../actions/auth";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
+    console.log("App Mounted")
+    const token = localStorage.getItem('token');
+    console.log("token", token)
+    if(token){
+    const   user = jwtDecode(token)
+    this.props.dispatch(authenticateUser(user))
+    console.log(user)
+    }
   }
-
+  componentWillUnmount(){
+    console.log("App unmounted")
+  }
   render() {
+    console.log("app rendeer")
     console.log("inside App", this.props.posts);
     return (
       <Router>
         <div>
           {/* 
-        <Post ></Post> */}
+          <Post></Post> */}
           <Navbar></Navbar>
           <Switch>
             <Route

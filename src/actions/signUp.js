@@ -5,12 +5,12 @@ export const signUpStart = () => {
   return { type: SIGN_UP_START };
 };
 export const signUpFailed = (message) => {
-  return { type: SIGN_UP_FAILED, message };
+  return { type: SIGN_UP_FAILED, error : message  };
 };
-export const SignUpSuccess = (data) => {
+export const SignUpSuccess = (user) => {
   return {
     type: SIGN_UP_SUCCESS,
-    data: data,
+    user: user,
   };
 };
 export const signUp = (name, email, password, confirmPassword) => {
@@ -35,7 +35,9 @@ export const signUp = (name, email, password, confirmPassword) => {
         console.log("SingUp : ", data);
         if (data.success) {
           console.log("SingUp : ", data);
-          dispatch(SignUpSuccess(data.data));
+          localStorage.setItem('token',data.token)
+          dispatch(SignUpSuccess(data.data.user));
+          return ;
         }
         dispatch(signUpFailed(data.message));
       });
