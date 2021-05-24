@@ -54,11 +54,13 @@ function Navbar(props) {
       </div>
       <div className="right-nav">
         {props.auth.isLoggedIn&&<div className="user">
+          <Link to='/UserProfile'>
           <img
             src="https://image.flaticon.com/icons/png/128/848/848043.png"
             alt="user-dp"
             id="user-dp"
           ></img>
+          </Link>
           <span>{props.auth.user.name}</span>
         </div>}
        
