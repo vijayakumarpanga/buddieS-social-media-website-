@@ -35,10 +35,11 @@ class Login extends Component {
   };
   render() {
     const { isInProgress, error,isLoggedIn} = this.props.auth;
-    console.log(this.props);
+    console.log("inside login",this.props);
+    const {location}= this.props.location.state|| {location :{pathname: '/'}}
     if(isLoggedIn){
       return  (
-        <Redirect to="/"></Redirect>
+        <Redirect to={location.pathname}></Redirect>
       )
     }
     return (

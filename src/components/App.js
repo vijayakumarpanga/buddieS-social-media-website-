@@ -14,11 +14,14 @@ import { authenticateUser } from "../actions/auth";
 import UserProfile from "./UserProfile";
 
  const PrivateRoute=(privateProps)=>{
-   console.log(privateProps)
+   console.log("privateProps",privateProps)
   const {path,isLoggedIn,component:Component}= privateProps
   return (<Route path={path}  render={(props)=>{
     console.log("Route props",props)
-    return isLoggedIn?(<Component {...props}></Component>):(<Redirect to="/login"></Redirect>)
+    return isLoggedIn?(<Component {...props}></Component>)
+    :(<Redirect to={{pathname : '/login',
+                     state : props.location,
+                 }}></Redirect>)
   }}></Route>)
 };
 class App extends Component {

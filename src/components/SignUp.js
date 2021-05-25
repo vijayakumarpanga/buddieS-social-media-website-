@@ -49,10 +49,10 @@ class SignUp extends Component {
   };
   render() {
     const { isInProgress, error,isLoggedIn } = this.props.auth;
-    console.log("Sign up rendered")
+    console.log("Sign up rendered",this.props)
     console.log(this.props);
     if(isLoggedIn){
-      <Redirect to='/'></Redirect>
+      return <Redirect to='/'></Redirect>
     }
     return (
       <form className="login-form">
